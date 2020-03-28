@@ -43,14 +43,11 @@ if __name__ == "__main__":
             "DO": ["Matsak I.K.", "Yakimov R.Y.", "Polotsky S.V."],
             "English": ["Mrs Simson", "Mrs Jonson", "Mrs Rush"],
             "Сulture": ["Kurembek M.L.", "Tetera P.K."],
-            "NONE": ["NONE{}".format(i) for i in range(2)]
-
+            "NONE": []
         },
         "Groups":[
             ("K1", 30),
             ("K2", 29),
-            # ("K3", 28),
-            # ("K4", 31),
         ],
         "Days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "Lessons": {
@@ -62,6 +59,8 @@ if __name__ == "__main__":
         }
     }
 
-    with open("schedule_info.pkl", "wb") as f:
+    d["Teachers"]["NONE"] = ["NONE{}".format(i) for i in range(len(d["Groups"]) + 1)] # TODO
+
+    with open("config\\schedule_info.pkl", "wb") as f:
         pickle.dump(d, f)
     

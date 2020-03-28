@@ -1,13 +1,20 @@
+import argparse
+
 from schedule_config import ScheduleConfig
 from schedule import Schedule
 from utils import read_file_pickle
 
-EPOCH_SIZE = 5000
 POPULATION_SIZE = 128
 
 if __name__ == "__main__":
 
-    data_config = read_file_pickle("schedule_info.pkl")
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--epoch', metavar='N', default=1000, type=int, help='epoch size')
+    parser.add_argument('--out_path', metavar='P', default="saves\\best1.pkl",
+                        type=str, help='path to save file')
+    args = parser.parse_args()
+
+    data_config = read_file_pickle("config\\schedule_info.pkl")
     config = ScheduleConfig(data_config)
     
     population = []
@@ -17,7 +24,7 @@ if __name__ == "__main__":
         s.init_schedule()
         population.append(s)        
 
-    for ep in range(EPOCH_SIZE):
+    for ep in range(args.epoch):
         for p in population:
             p.evaluate() 
 
