@@ -186,7 +186,14 @@ class Schedule:
                                 
                 for i in range(6):
                     row_param = [time[i]]
+
                     for idx, _ in enumerate(self._config.days):
+                        
+                        # Kostul
+                        if current_table[idx][lesson_num-1][1] == "NONE":
+                            row_param.append("")
+                            continue 
+
                         if len(current_table[idx][lesson_num-1]) <= i:
                             row_param.append("")
                             continue                  
